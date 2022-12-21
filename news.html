@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Covid-19</title>
+    <link rel="stylesheet" href="asset/style2.css">
+</head>
+<body>
+    <header>
+        <div class="container" style="display: flex;justify-content: space-between;align-items: center;">
+            <div>
+                <div class="title">
+                    Update
+                </div>
+                <div class="subtitle">COVID-19</div>
+            </div>
+            <div>
+                <ul style="display: inline-flex; text-decoration: none;color: #22272c;list-style: none;font-size: 14px;">
+                    <li style="margin-left: 50px;"><a href="index.html" style="color: #22272c;text-decoration: none;">Beranda</a></li>
+                    <li style="margin-left: 50px;"><a href="news.html" style="font-weight: bold; color: #22272c;text-decoration: none;">Berita</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="margin-top:20px; margin-bottom:50px">
+        <p style="font-size: 24px;margin-bottom: 10px;">Berita</p> 
+
+        <div class="row" id="news">
+
+        </div>
+    </div>
+
+    <div style="background-color: #22272c;">
+        <div class="container" style="padding: 20px 0 20px 0;display: flex;justify-content: space-between;align-items: center;color: white;">
+            <div>
+                <div class="title">
+                    Update
+                </div>
+                <div class="subtitle">COVID-19</div>
+            </div>
+            <div style="font-size: 14px;">
+                <p>212210063 - Arya Dhievha R</p>
+                <p>212210077 - M. Fajar Abimanyu</p>
+                <p>SI-21-PB</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        let rand = Math.floor(Math.random() * 21);
+
+        const news1 = {
+            "async": true,
+            "crossDomain": true,
+            "url": `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-coronavirus-news/${rand}`,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": "d6e6fa6f66mshf2efa86234b2f3cp11bad1jsnec165a161eb5",
+                "X-RapidAPI-Host": "vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com"
+            }
+        };
+
+        const news2 = {
+            "async": true,
+            "crossDomain": true,
+            "url": `https://vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com/api/news/get-coronavirus-news/${rand + 1}`,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": "d6e6fa6f66mshf2efa86234b2f3cp11bad1jsnec165a161eb5",
+                "X-RapidAPI-Host": "vaccovid-coronavirus-vaccine-and-treatment-tracker.p.rapidapi.com"
+            }
+        };
+
+        $.ajax(news1).done(function (response) {
+            let data = response.news;
+            for (let i = 0; i < data.length; i++) {
+                let date = new Date(`${data[i].pubDate}`);
+                let convertDate = date.toLocaleDateString("id", options);
+                let title = `${data[i].title}`;
+                let shortTitle = title.slice(0, 50)+'...';
+
+                $( "#news" ).append( `<div class="card-4" style="background-color: white;color: black;min-height: 300px;padding: 0;width: 23%; ">
+                <a class="card-link" href="${data[i].link}">
+                    <div class="card-image" style="background-image: url('${data[i].urlToImage}');"></div>
+                    <div class="card-content" style="font-size: 14px;">
+                        <div id="title">${shortTitle}</div>
+                        <br><small id="date">${convertDate}</small>
+                    </div>
+                </a>
+            </div>` );
+            }
+        });
+
+        $.ajax(news2).done(function (response) {
+            let data = response.news;
+            for (let i = 0; i < data.length; i++) {
+                let date = new Date(`${data[i].pubDate}`);
+                let convertDate = date.toLocaleDateString("id", options);
+                let title = `${data[i].title}`;
+                let shortTitle = title.slice(0, 50)+'...';
+
+                $( "#news" ).append( `<div class="card-4" style="background-color: white;color: black;min-height: 300px;padding: 0;width: 23%; ">
+                <a class="card-link" href="${data[i].link}">
+                    <div class="card-image" style="background-image: url('${data[i].urlToImage}');"></div>
+                    <div class="card-content" style="font-size: 14px;">
+                        <div id="title">${shortTitle}</div>
+                        <br><small id="date">${convertDate}</small>
+                    </div>
+                </a>
+            </div>` );
+            }
+        });
+
+
+    </script>
+</body>
+</html>

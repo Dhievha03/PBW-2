@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Covid-19</title>
+    <link rel="stylesheet" href="asset/style2.css">
+</head>
+<body>
+    <header>
+        <div class="container" style="display: flex;justify-content: space-between;align-items: center;">
+            <div>
+                <div class="title">
+                    Update
+                </div>
+                <div class="subtitle">COVID-19</div>
+            </div>
+            <div>
+                <ul style="display: inline-flex; text-decoration: none;color: #22272c;list-style: none;font-size: 14px;">
+                    <li style="margin-left: 50px;"><a href="index.html" style="font-weight: bold; color: #22272c;text-decoration: none;">Beranda</a></li>
+                    <li style="margin-left: 50px;"><a href="news.html" style="color: #22272c;text-decoration: none;">Berita</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="text-align: center;margin-top: 50px;margin-bottom: 50px;">
+        <p style="display: block;font-size: 56px;font-weight: bold;margin-bottom: 5px;">Pilih Negara</p>
+        <select class="select" name="" id="country" style="width: 50%;padding: 15px 20px 15px 20px;">
+            <option value="" disabled>-- Pilih Negara --</option>
+        </select>
+    </div>
+
+    <div class="container" style="position: relative;padding: 0;margin-top:20px">
+        <div class="load hide" style="font-weight: 900; font-size: 32px; color:white;position: absolute;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.63);display: flex;justify-content: center;align-items: center;">
+                Tunggu Sebentar...
+        </div>
+        <p style="font-size: 24px;">Jumlah kasus di <span style="font-weight: bold;" id="country-name"></span> saat ini</p> 
+
+        <div class="row">
+            <div class="card-2" style="text-align: center;background-color: #2D033B;color: white;">
+                <div style="font-size: 64px; " id="confirm">
+                    - - - -
+                </div>
+                Terkonfirmasi
+            </div>
+            <div class="card-2" style="text-align: center;background-color: #f5a624;color: white;">
+                <div style="font-size: 64px;" id="active">
+                    - - - -
+                </div>
+                Dalam Perawatan
+            </div>
+            <div class="card-2" style="text-align: center;background-color: #219653;color: white;">
+                <div style="font-size: 64px;" id="recover">
+                    - - - -
+                </div>
+                Sembuh
+            </div>
+            <div class="card-2" style="text-align: center;background-color: #d8232a;color: white;">
+                <div style="font-size: 64px;" id="death">
+                    - - - -
+                </div>
+                Meninggal
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="position: relative;padding: 0;margin-top:50px;margin-bottom:50px">
+        <div class="load hide" style="font-weight: 900; font-size: 32px; color:white;position: absolute;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.63);display: flex;justify-content: center;align-items: center;">
+                . . .
+        </div>
+        <p style="font-size: 24px;margin-bottom: 5px;">Update <span style="font-weight: bold;" id="date"></span></p>
+        <div class="row">
+            <div class="card-2" style="text-align: center;background-color: white;">
+                <div style="font-size: 64px; color: #2D033B;" id="update-confirm">
+                    - - - -
+                </div>
+                Terkonfirmasi
+            </div>
+            <div class="card-2" style="text-align: center;background-color: white;">
+                <div style="font-size: 64px; color: #d8232a;" id="update-death">
+                    - - - -
+                </div>
+                Meninggal
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #22272c;">
+        <div class="container" style="padding: 20px 0 20px 0;display: flex;justify-content: space-between;align-items: center;color: white;">
+            <div>
+                <div class="title">
+                    Update
+                </div>
+                <div class="subtitle">COVID-19</div>
+            </div>
+            <div style="font-size: 14px;">
+                <p>212210063 - Arya Dhievha R</p>
+                <p>212210077 - M. Fajar Abimanyu</p>
+                <p>SI-21-PB</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://covid-193.p.rapidapi.com/countries",
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": "d6e6fa6f66mshf2efa86234b2f3cp11bad1jsnec165a161eb5",
+                "X-RapidAPI-Host": "covid-193.p.rapidapi.com"
+            }
+        };
+
+        const idn = {
+            "async": true,
+            "crossDomain": true,
+            "url": `https://covid-193.p.rapidapi.com/statistics?country=Indonesia`,
+            "method": "GET",
+            "headers": {
+                "X-RapidAPI-Key": "d6e6fa6f66mshf2efa86234b2f3cp11bad1jsnec165a161eb5",
+                "X-RapidAPI-Host": "covid-193.p.rapidapi.com"
+            }   
+        };
+
+        $.ajax(settings).done(function (response) {
+            let country = response.response;
+
+            for (let i = 0; i < country.length; i++) {
+                $("#country").append(`<option value="${country[i]}">${country[i]}</option>`);
+            }
+
+            $("#country option[value='Indonesia']").prop('selected', true);
+        });
+
+        $.ajax(idn).done(function (response) {
+            let data = response.response[0];
+            let date = new Date(`${data.time}`);
+
+            $('#country-name').text('Indonesia');
+            $('#confirm').text(formatNumber(`${data.cases.total ?? '0'}`));
+            $('#active').text(formatNumber(`${data.cases.active ?? 0 + data.cases.critical ?? 0}`));
+            $('#recover').text(formatNumber(`${data.cases.recovered ?? '0'}`));
+            $('#death').text(formatNumber(`${data.deaths.total ?? '0'}`));
+
+            $('#date').text(`${date.toLocaleDateString("id", options)}`)
+            $('#update-confirm').text(formatNumber(`${data.cases.new ?? '0'}`));
+            $('#update-death').text(formatNumber(`${data.deaths.new ?? '0'}`));
+
+        });
+    </script>
+    
+
+    <script>
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+        $('#country').on('change', function() {
+            let val = this.value;
+
+            const settings = {
+                "async": true,
+                "crossDomain": true,
+                "url": `https://covid-193.p.rapidapi.com/statistics?country=${val}`,
+                "method": "GET",
+                "headers": {
+                    "X-RapidAPI-Key": "d6e6fa6f66mshf2efa86234b2f3cp11bad1jsnec165a161eb5",
+                    "X-RapidAPI-Host": "covid-193.p.rapidapi.com"
+                },
+                "beforeSend": function(){
+                    $('.load').removeClass("hide");
+                },   
+            };
+
+           
+
+            $.ajax(settings).done(function (response) {
+                let data = response.response[0];
+                let date = new Date(`${data.time}`);
+
+                $('#country-name').text(`${val}`);
+                $('#confirm').text(formatNumber(`${data.cases.total ?? '0'}`));
+                $('#active').text(formatNumber(`${data.cases.active ?? 0 + data.cases.critical ?? 0}`));
+                $('#recover').text(formatNumber(`${data.cases.recovered ?? '0'}`));
+                $('#death').text(formatNumber(`${data.deaths.total ?? '0'}`));
+
+                $('#date').text(`${date.toLocaleDateString("id", options)}`)
+                $('#update-confirm').text(formatNumber(`${data.cases.new ?? '0'}`));
+                $('#update-death').text(formatNumber(`${data.deaths.new ?? '0'}`));
+
+                $('.load').addClass("hide");
+
+            });
+        });
+    </script>
+</body>
+</html>
